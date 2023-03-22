@@ -1,8 +1,15 @@
 import { useState } from "react";
 
+const inc = (count : number) => count + 1
+
 const Counter = () => {
   const [count, setCount] = useState(0);
 
+  const handleClick = () => {
+    setCount(count => count + 1)
+    setCount(count => count + 1)
+    setCount(count => count + 1)
+  }
 
 
   return (
@@ -10,7 +17,7 @@ const Counter = () => {
       <h1>Days Since the Last Accident</h1>
       <p className="text-6xl">0</p>
       <div className="flex gap-2">
-        <button>➖ Decrement</button>
+        <button onClick={() => setCount(count => count + 1)}>➖ Decrement</button>
         <button>🔁 Reset</button>
         <button>➕ Increment</button>
       </div>
