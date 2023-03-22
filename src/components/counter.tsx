@@ -1,15 +1,9 @@
 import { useState } from "react";
 
-const inc = (count : number) => count + 1
-
 const Counter = () => {
   const [count, setCount] = useState(0);
+  const [draftCount, setDraftCount] = useState(count);
 
-  const handleClick = () => {
-    setCount(count => count + 1)
-    setCount(count => count + 1)
-    setCount(count => count + 1)
-  }
 
 
   return (
@@ -17,13 +11,17 @@ const Counter = () => {
       <h1>Days Since the Last Accident</h1>
       <p className="text-6xl">0</p>
       <div className="flex gap-2">
-        <button onClick={() => setCount(count => count + 1)}>➖ Decrement</button>
+        <button onClick={() => setCount(count => count - 1)}>➖ Decrement</button>
         <button>🔁 Reset</button>
-        <button>➕ Increment</button>
+        <button onClick={() => setCount(count => count + 1)}>➕ Increment</button>
       </div>
       <div>
         <form onSubmit={(e) => e.preventDefault()}>
-          <input type="number" value={0} />
+          <input type="number"
+            value={draftCount}
+            onChange={(e) => setDraftCount(e.target.valueAsNumber)}  
+            onSubmit={() =>  setCount(draftCount)}
+          />
           <button type="submit">Update Counter</button>
         </form>
       </div>
