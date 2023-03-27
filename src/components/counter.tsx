@@ -40,7 +40,7 @@ const reducer = (state = initialState, action: Action | ActionWithPayload) => {
   if (action.type === 'updateDraftCount') {
     console.log('updateDraftCount');
 
-    return { count, draftCount: action.payload };
+    return { count, draftCount: action.paylod };
   }
 
   if (action.type === 'updateCountFromDraft') {
@@ -53,7 +53,7 @@ const reducer = (state = initialState, action: Action | ActionWithPayload) => {
 const Counter = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   
-  dispatch({ type: 'increment', payload: 3 })
+  dispatch({ type: 'increment' })
 
 
   return (
