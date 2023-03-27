@@ -11,7 +11,16 @@ const initialState: InitialState = {
   draftCount: 0,
 };
 
-const reducer = (state = initialState, action: any) => {
+type Action = {
+  type: 'increment' | 'decrement' | 'reset' | 'updateCountFromDraft';
+}
+
+type ActionWithPayload = {
+  type: 'updateDraftCount';
+  paylod: number;
+}
+
+const reducer = (state = initialState, action: Action | ActionWithPayload) => {
   const { count, draftCount } = state;
 
   if (action.type === 'increment') {
@@ -43,7 +52,8 @@ const reducer = (state = initialState, action: any) => {
 
 const Counter = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [draftCount, setDraftCount] = useState(count);
+  
+  dispatch({ type: 'increment', payload: 3 })
 
 
   return (
@@ -57,14 +67,8 @@ const Counter = () => {
       </div>
       <div>
         <form onSubmit={(e) => {
-          e.preventDefault();
-          dispatch({ action: 'updateDraftCount' })
-        }}>
-          <input type="number"
-            value={draftCount}
-            onChange={(e) => setDraftCount(e.target.valueAsNumber)}  
-            onSubmit={() =>  setCount(draftCount)}
-          />
+          e.preventDefault() }}>
+          <input type="number" value={ state.draftCount }/>
           <button type="submit">Update Counter</button>
         </form>
       </div>
